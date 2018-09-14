@@ -13,12 +13,12 @@ class PhotosViewController: UIViewController, PhotosView {
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var messageLabel: UILabel!
     
-    private var viewModel: PhotosViewModel!
+    private var photosViewModel: PhotosViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = PhotosViewModel(photosView: self)
-        viewModel.loadPhotos()
+        photosViewModel = PhotosViewModel(photosView: self)
+        photosViewModel.loadPhotos()
     }
 }
 
@@ -38,11 +38,15 @@ extension PhotosViewController {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.photos.count
+        return photosViewModel.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath)
+        
+        let photoViewModel = photosViewModel.photos[indexPath.item]
+        (cell as? PhotoCell)?.set(photoViewModel: photoViewModel)
+        
         return cell
     }
     
