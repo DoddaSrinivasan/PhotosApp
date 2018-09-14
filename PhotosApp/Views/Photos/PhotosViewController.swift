@@ -51,3 +51,9 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
 }
+
+extension PhotosViewController {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        photosCollectionView.collectionViewLayout.invalidateLayout()
+    }
+}

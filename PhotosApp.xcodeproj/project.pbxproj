@@ -41,6 +41,7 @@
 		E3D03266214C0CFB00EAAC3D /* MockPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03265214C0CFB00EAAC3D /* MockPhotosView.swift */; };
 		E3D0326A214C136900EAAC3D /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03269214C136900EAAC3D /* PhotosViewController.swift */; };
 		E3D0326C214C138500EAAC3D /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0326B214C138500EAAC3D /* PhotoCell.swift */; };
+		E3D0326F214C1B4C00EAAC3D /* MozaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0326E214C1B4C00EAAC3D /* MozaicLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		E3D03265214C0CFB00EAAC3D /* MockPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotosView.swift; sourceTree = "<group>"; };
 		E3D03269214C136900EAAC3D /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		E3D0326B214C138500EAAC3D /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		E3D0326E214C1B4C00EAAC3D /* MozaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MozaicLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +344,7 @@
 		E3D03267214C132900EAAC3D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E3D0326D214C1B1100EAAC3D /* Common */,
 				E3D03268214C135100EAAC3D /* Photos */,
 			);
 			path = Views;
@@ -354,6 +357,14 @@
 				E3D0326B214C138500EAAC3D /* PhotoCell.swift */,
 			);
 			path = Photos;
+			sourceTree = "<group>";
+		};
+		E3D0326D214C1B1100EAAC3D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E3D0326E214C1B4C00EAAC3D /* MozaicLayout.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,6 +483,7 @@
 				E3D03242214BF1A300EAAC3D /* PhotosAPI.swift in Sources */,
 				E3D0326A214C136900EAAC3D /* PhotosViewController.swift in Sources */,
 				E3D03245214BF5B900EAAC3D /* PhotosEndPoints.swift in Sources */,
+				E3D0326F214C1B4C00EAAC3D /* MozaicLayout.swift in Sources */,
 				E3D03248214BF5E800EAAC3D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
