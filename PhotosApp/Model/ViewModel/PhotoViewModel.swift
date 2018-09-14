@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  File.swift
 //  PhotosApp
 //
 //  Created by Srinivas Dodda on 14/09/18.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct AlbumServiceApiConfig {
-    static let scheme = "http"
-    static let host = "192.168.12.15"
+struct PhotoViewModel {
+    var photoUrl: URL?
 }

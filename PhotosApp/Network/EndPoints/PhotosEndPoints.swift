@@ -31,4 +31,13 @@ class PhotosEndPoints {
         return photosURLComponents.url
     }
     
+    func imageEndpoint(imageId: String) -> URL? {
+        var photoImageURLComponents = URLComponents()
+        photoImageURLComponents.scheme = scheme
+        photoImageURLComponents.host = host
+        photoImageURLComponents.path = "/images/\(imageId).png"
+        
+        return photoImageURLComponents.url
+    }
+    
 }

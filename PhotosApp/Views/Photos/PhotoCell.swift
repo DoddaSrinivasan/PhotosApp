@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PhotoCell.swift
 //  PhotosApp
 //
 //  Created by Srinivas Dodda on 14/09/18.
@@ -8,11 +8,6 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
+class PhotoCell: UICollectionViewCell {
+    
 }
-
