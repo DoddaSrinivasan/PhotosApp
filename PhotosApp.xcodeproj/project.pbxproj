@@ -23,6 +23,18 @@
 		E3D03232214BE7A700EAAC3D /* NetworkableImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03231214BE7A700EAAC3D /* NetworkableImageViewTests.swift */; };
 		E3D03234214BE7D300EAAC3D /* MockCacheableClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03233214BE7D300EAAC3D /* MockCacheableClient.swift */; };
 		E3D03237214BE81C00EAAC3D /* SampleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D03236214BE81C00EAAC3D /* SampleImage.png */; };
+		E3D0323C214BED5E00EAAC3D /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0323B214BED5E00EAAC3D /* ServiceResponse.swift */; };
+		E3D0323E214BED8900EAAC3D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0323D214BED8900EAAC3D /* Photo.swift */; };
+		E3D03240214BED9200EAAC3D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0323F214BED9200EAAC3D /* APIError.swift */; };
+		E3D03242214BF1A300EAAC3D /* PhotosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03241214BF1A300EAAC3D /* PhotosAPI.swift */; };
+		E3D03245214BF5B900EAAC3D /* PhotosEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03244214BF5B900EAAC3D /* PhotosEndPoints.swift */; };
+		E3D03248214BF5E800EAAC3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03247214BF5E800EAAC3D /* Constants.swift */; };
+		E3D0324B214BF76500EAAC3D /* PhotosEndPointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0324A214BF76500EAAC3D /* PhotosEndPointsTests.swift */; };
+		E3D0324E214BF96D00EAAC3D /* PhotosAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0324D214BF96D00EAAC3D /* PhotosAPITests.swift */; };
+		E3D03250214BF98B00EAAC3D /* MockHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0324F214BF98B00EAAC3D /* MockHttpClient.swift */; };
+		E3D03254214BFDFE00EAAC3D /* APIErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03253214BFDFE00EAAC3D /* APIErrorTests.swift */; };
+		E3D03256214BFE9E00EAAC3D /* PhotoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03255214BFE9E00EAAC3D /* PhotoTests.swift */; };
+		E3D03258214BFF1C00EAAC3D /* ServiceResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D03257214BFF1C00EAAC3D /* ServiceResponseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +68,18 @@
 		E3D03231214BE7A700EAAC3D /* NetworkableImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkableImageViewTests.swift; sourceTree = "<group>"; };
 		E3D03233214BE7D300EAAC3D /* MockCacheableClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCacheableClient.swift; sourceTree = "<group>"; };
 		E3D03236214BE81C00EAAC3D /* SampleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleImage.png; sourceTree = "<group>"; };
+		E3D0323B214BED5E00EAAC3D /* ServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
+		E3D0323D214BED8900EAAC3D /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		E3D0323F214BED9200EAAC3D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		E3D03241214BF1A300EAAC3D /* PhotosAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAPI.swift; sourceTree = "<group>"; };
+		E3D03244214BF5B900EAAC3D /* PhotosEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosEndPoints.swift; sourceTree = "<group>"; };
+		E3D03247214BF5E800EAAC3D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E3D0324A214BF76500EAAC3D /* PhotosEndPointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosEndPointsTests.swift; sourceTree = "<group>"; };
+		E3D0324D214BF96D00EAAC3D /* PhotosAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAPITests.swift; sourceTree = "<group>"; };
+		E3D0324F214BF98B00EAAC3D /* MockHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHttpClient.swift; sourceTree = "<group>"; };
+		E3D03253214BFDFE00EAAC3D /* APIErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorTests.swift; sourceTree = "<group>"; };
+		E3D03255214BFE9E00EAAC3D /* PhotoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTests.swift; sourceTree = "<group>"; };
+		E3D03257214BFF1C00EAAC3D /* ServiceResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResponseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +121,10 @@
 		E3D031F8214BDECA00EAAC3D /* PhotosApp */ = {
 			isa = PBXGroup;
 			children = (
+				E3D03246214BF5D800EAAC3D /* Utils */,
 				E3D03219214BE02200EAAC3D /* Network */,
+				E3D03238214BED1300EAAC3D /* API */,
+				E3D03239214BED2900EAAC3D /* Model */,
 				E3D031F9214BDECA00EAAC3D /* AppDelegate.swift */,
 				E3D031FB214BDECA00EAAC3D /* ViewController.swift */,
 				E3D031FD214BDECA00EAAC3D /* Main.storyboard */,
@@ -111,9 +138,11 @@
 		E3D0320D214BDECB00EAAC3D /* PhotosAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				E3D03235214BE7FD00EAAC3D /* Resources */,
-				E3D0321E214BE06900EAAC3D /* Mocks */,
 				E3D0321F214BE06F00EAAC3D /* Network */,
+				E3D0324C214BF95100EAAC3D /* API */,
+				E3D03251214BFDB800EAAC3D /* Model */,
+				E3D0321E214BE06900EAAC3D /* Mocks */,
+				E3D03235214BE7FD00EAAC3D /* Resources */,
 				E3D0320E214BDECB00EAAC3D /* PhotosAppTests.swift */,
 				E3D03210214BDECB00EAAC3D /* Info.plist */,
 			);
@@ -123,6 +152,7 @@
 		E3D03219214BE02200EAAC3D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E3D03243214BF5A700EAAC3D /* EndPoints */,
 				E3D0322C214BE6FD00EAAC3D /* Client */,
 				E3D0322D214BE71A00EAAC3D /* NetworkableImageView.swift */,
 			);
@@ -140,6 +170,7 @@
 		E3D0321F214BE06F00EAAC3D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E3D03249214BF75600EAAC3D /* EndPoints */,
 				E3D03223214BE10E00EAAC3D /* Client */,
 				E3D03231214BE7A700EAAC3D /* NetworkableImageViewTests.swift */,
 			);
@@ -151,6 +182,7 @@
 			children = (
 				E3D03221214BE09500EAAC3D /* MockUrlSession.swift */,
 				E3D03233214BE7D300EAAC3D /* MockCacheableClient.swift */,
+				E3D0324F214BF98B00EAAC3D /* MockHttpClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -180,6 +212,82 @@
 				E3D03236214BE81C00EAAC3D /* SampleImage.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		E3D03238214BED1300EAAC3D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E3D03241214BF1A300EAAC3D /* PhotosAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		E3D03239214BED2900EAAC3D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3D0323A214BED3A00EAAC3D /* Entity */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E3D0323A214BED3A00EAAC3D /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				E3D0323B214BED5E00EAAC3D /* ServiceResponse.swift */,
+				E3D0323D214BED8900EAAC3D /* Photo.swift */,
+				E3D0323F214BED9200EAAC3D /* APIError.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		E3D03243214BF5A700EAAC3D /* EndPoints */ = {
+			isa = PBXGroup;
+			children = (
+				E3D03244214BF5B900EAAC3D /* PhotosEndPoints.swift */,
+			);
+			path = EndPoints;
+			sourceTree = "<group>";
+		};
+		E3D03246214BF5D800EAAC3D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E3D03247214BF5E800EAAC3D /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E3D03249214BF75600EAAC3D /* EndPoints */ = {
+			isa = PBXGroup;
+			children = (
+				E3D0324A214BF76500EAAC3D /* PhotosEndPointsTests.swift */,
+			);
+			path = EndPoints;
+			sourceTree = "<group>";
+		};
+		E3D0324C214BF95100EAAC3D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E3D0324D214BF96D00EAAC3D /* PhotosAPITests.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		E3D03251214BFDB800EAAC3D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3D03252214BFDE000EAAC3D /* Entity */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E3D03252214BFDE000EAAC3D /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				E3D03253214BFDFE00EAAC3D /* APIErrorTests.swift */,
+				E3D03255214BFE9E00EAAC3D /* PhotoTests.swift */,
+				E3D03257214BFF1C00EAAC3D /* ServiceResponseTests.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,12 +392,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D0323E214BED8900EAAC3D /* Photo.swift in Sources */,
 				E3D0321B214BE02F00EAAC3D /* BaseNetworkClient.swift in Sources */,
 				E3D0322E214BE71A00EAAC3D /* NetworkableImageView.swift in Sources */,
 				E3D0322B214BE5C700EAAC3D /* CacheableClient.swift in Sources */,
 				E3D031FC214BDECA00EAAC3D /* ViewController.swift in Sources */,
 				E3D0321D214BE04E00EAAC3D /* HttpClient.swift in Sources */,
+				E3D0323C214BED5E00EAAC3D /* ServiceResponse.swift in Sources */,
+				E3D03240214BED9200EAAC3D /* APIError.swift in Sources */,
 				E3D031FA214BDECA00EAAC3D /* AppDelegate.swift in Sources */,
+				E3D03242214BF1A300EAAC3D /* PhotosAPI.swift in Sources */,
+				E3D03245214BF5B900EAAC3D /* PhotosEndPoints.swift in Sources */,
+				E3D03248214BF5E800EAAC3D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,11 +411,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D03250214BF98B00EAAC3D /* MockHttpClient.swift in Sources */,
 				E3D03222214BE09500EAAC3D /* MockUrlSession.swift in Sources */,
+				E3D0324E214BF96D00EAAC3D /* PhotosAPITests.swift in Sources */,
 				E3D03234214BE7D300EAAC3D /* MockCacheableClient.swift in Sources */,
+				E3D03258214BFF1C00EAAC3D /* ServiceResponseTests.swift in Sources */,
+				E3D03256214BFE9E00EAAC3D /* PhotoTests.swift in Sources */,
 				E3D0320F214BDECB00EAAC3D /* PhotosAppTests.swift in Sources */,
+				E3D03254214BFDFE00EAAC3D /* APIErrorTests.swift in Sources */,
 				E3D03225214BE11A00EAAC3D /* HTTPClientTests.swift in Sources */,
 				E3D03230214BE74A00EAAC3D /* CacheableClientTests.swift in Sources */,
+				E3D0324B214BF76500EAAC3D /* PhotosEndPointsTests.swift in Sources */,
 				E3D03232214BE7A700EAAC3D /* NetworkableImageViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
