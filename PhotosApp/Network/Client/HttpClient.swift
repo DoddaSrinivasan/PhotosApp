@@ -55,5 +55,6 @@ extension HttpClient: HTTPClientProtocol {
             }
         }
         task.resume()
+        session.finishTasksAndInvalidate()
     }
 }

@@ -12,6 +12,8 @@ import Foundation
 class MockUrlSession: URLSessionProtocol {
     
     private (set) var url: URL?
+    private (set) var isfinishTasksAndInvalidateCalled = false
+    
     let data: Data?
     let error: Error?
     let dataTask: URLSessionDataTaskProtocol
@@ -27,6 +29,10 @@ class MockUrlSession: URLSessionProtocol {
         url = request.url
         completion(data, nil, error)
         return dataTask
+    }
+    
+    func finishTasksAndInvalidate() {
+        isfinishTasksAndInvalidateCalled = true
     }
 }
 

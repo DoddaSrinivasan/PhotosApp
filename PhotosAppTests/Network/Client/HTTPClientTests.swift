@@ -41,6 +41,7 @@ class HTTPClientTests: XCTestCase {
         
         XCTAssertNil(mockSession.url)
         XCTAssert(!mockDataTask.isResumeCalled)
+        XCTAssert(!mockSession.isfinishTasksAndInvalidateCalled)
     }
     
     func testShouldCompleteWithErrorIfDataIsNil() {
@@ -57,6 +58,7 @@ class HTTPClientTests: XCTestCase {
         
         XCTAssert(mockSession.url!.absoluteString == mockUrlString)
         XCTAssert(mockDataTask.isResumeCalled)
+        XCTAssert(mockSession.isfinishTasksAndInvalidateCalled)
     }
     
     func testShouldCompleteWithErrorIfDataIsNotJsonJSONSerializable() {
@@ -77,6 +79,7 @@ class HTTPClientTests: XCTestCase {
         
         XCTAssert(mockSession.url!.absoluteString == mockUrlString)
         XCTAssert(mockDataTask.isResumeCalled)
+        XCTAssert(mockSession.isfinishTasksAndInvalidateCalled)
     }
     
     func testShouldCompleteWithData() {
@@ -95,6 +98,7 @@ class HTTPClientTests: XCTestCase {
         
         XCTAssert(mockSession.url!.absoluteString == mockUrlString)
         XCTAssert(mockDataTask.isResumeCalled)
+        XCTAssert(mockSession.isfinishTasksAndInvalidateCalled)
     }
 }
 

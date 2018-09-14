@@ -14,6 +14,7 @@ protocol URLSessionDataTaskProtocol {
 
 protocol URLSessionProtocol {
     func dataTask(with request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Swift.Void) -> URLSessionDataTaskProtocol
+    func finishTasksAndInvalidate()
 }
 
 extension URLSession: URLSessionProtocol {
