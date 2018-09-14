@@ -9,5 +9,11 @@
 import Foundation
 
 struct PhotoViewModel {
+    
     var photoUrl: URL?
+    var aspectRatio: Float
+    
+    func heightFor(width: Float) -> Float {
+        return aspectRatio*width
+    }
 }

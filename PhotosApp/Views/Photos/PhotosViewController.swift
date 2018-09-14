@@ -17,6 +17,7 @@ class PhotosViewController: UIViewController, PhotosView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        (photosCollectionView.collectionViewLayout as? MozaicLayout)?.setDelegate(delegate: self)
         photosViewModel = PhotosViewModel(photosView: self)
         photosViewModel.loadPhotos()
     }
@@ -52,7 +53,14 @@ extension PhotosViewController: UICollectionViewDataSource {
     
 }
 
-extension PhotosViewController {
+extension PhotosViewController: MozaicLayoutDelegate {
+    
+    func heightForItem(in collectionView: UICollectionView?, forItemWidth: CGFloat, at indexPath: IndexPath) -> CGFloat {
+        let photoViewModel = photosViewModel.photos[indexPath.item]
+        let height = photoViewModel.heightFor(width: Float(forItemWidth))
+        return CGFloat(height)
+    }
+    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         photosCollectionView.collectionViewLayout.invalidateLayout()
     }

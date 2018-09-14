@@ -44,11 +44,12 @@ class PhotosViewModel {
             
             self?.photos = (photos ?? [])
                 .filter({ (photo) -> Bool in
-                    return photo.photoId != nil
+                    return photo.photoId != nil && photo.width != nil && photo.height != nil
                 })
                 .map({ (photo) -> PhotoViewModel in
                     let url = self?.imagesEndpoints.imageEndpoint(imageId: photo.photoId!)
-                    return PhotoViewModel(photoUrl: url)
+                    let aspectRatio = Float(photo.height!)/Float(photo.width!)
+                    return PhotoViewModel(photoUrl: url, aspectRatio: aspectRatio)
                 })
         }
     }

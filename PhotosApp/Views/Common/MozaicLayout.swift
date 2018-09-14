@@ -8,11 +8,21 @@
 
 import UIKit
 
+protocol MozaicLayoutDelegate {
+    func heightForItem(in collectionView: UICollectionView?, forItemWidth: CGFloat, at indexPath: IndexPath) -> CGFloat
+}
+
 class MozaicLayout: UICollectionViewLayout {
     
     private let minimumItemWidth: CGFloat = 200.0
     private var itemWidth: CGFloat = 0
     private var columns: [Column] = []
+    
+    private var delegate: MozaicLayoutDelegate!
+    
+    func setDelegate(delegate: MozaicLayoutDelegate) {
+        self.delegate = delegate
+    }
     
     private var numberOfColumns: Int = 0 {
         didSet {
@@ -29,7 +39,7 @@ class MozaicLayout: UICollectionViewLayout {
         let numberOfItems = self.collectionView?.numberOfItems(inSection: 0) ?? 0
         
         for index in 0..<numberOfItems {
-            let heightOfItem: CGFloat = 50 //This needs to be brought from the delegate
+            let heightOfItem = delegate.heightForItem(in: self.collectionView, forItemWidth: itemWidth, at: IndexPath(item: index, section: 0))
             let currentColumn = columns[index % numberOfColumns]
             currentColumn.addItem(width: itemWidth, height: heightOfItem)
         }
@@ -73,11 +83,6 @@ class MozaicLayout: UICollectionViewLayout {
         let width = min(minimumItemWidth, collectionViewWidth/2)
         numberOfColumns = Int(collectionViewWidth)/Int(width)
         itemWidth = collectionViewWidth/CGFloat(numberOfColumns)
-        
-        print("width: \(collectionViewWidth)")
-        print("possible Min Width: \(width)")
-        print("columns: \(numberOfColumns)")
-        print("item Width: \(itemWidth)")
     }
 }
 
@@ -100,8 +105,9 @@ fileprivate class Column {
         }
         
         let lastItemY = lastItem.origin.y
-        let newItemY = lastItemY + height
-        let itemToAdd = CGRect(x: x, y:  newItemY, width: width, height: height)
+        let lastItemHeight = lastItem.size.height
+        let newItemY = lastItemY + lastItemHeight
+        let itemToAdd = CGRect(x: x, y: newItemY, width: width, height: height)
         itemsBounds.append(itemToAdd)
     }
     
