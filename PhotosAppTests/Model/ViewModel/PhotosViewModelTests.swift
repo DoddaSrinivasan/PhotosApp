@@ -11,6 +11,7 @@ import XCTest
 
 class PhotosViewModelTests: XCTestCase {
     
+    //MARK: Load Photos from API Tests
     func testShouldShowErrorMessageOnLoadPhotosFailed() {
         let mockView = MockPhotosView()
         let mockPhotosApi = MockPhotosAPI<[Photo]>(data: nil, apiError: APIError(message: "Some Error"))
@@ -32,7 +33,7 @@ class PhotosViewModelTests: XCTestCase {
         photosViewModel.loadPhotos()
         
         XCTAssert(mockView.isShowMessageCalled)
-        XCTAssert(mockView.message == "Something went wrong")
+        XCTAssert(mockView.message == "Something went wrong. Try again later".localised)
     }
     
     func testShouldShowPhotosOnLoadPhotosSuccess() {
@@ -61,6 +62,141 @@ class PhotosViewModelTests: XCTestCase {
     }
     
     
+    //MARK: Camera Access and Pick from Camera Tests
+    func testShouldAskForCameraPermissionWhenNotDetermined() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockCameraPermission.setStatus(.notDetermined, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromCamera(with: MockCameraPermission.self)
+        
+        XCTAssertTrue(MockCameraPermission.isCameraAccessRequested)
+    }
+    
+    func testShouldNotDoAnythingWhenCameraAccessIsRequestedAndDenied() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockCameraPermission.setStatus(.notDetermined, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromCamera(with: MockCameraPermission.self)
+        
+        XCTAssertFalse(mockView.isPickPhotoFromCameraCalled)
+    }
+    
+    func testShouldAskViewToPickFromCameraWhenGranted() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockCameraPermission.setStatus(.notDetermined, grantedWhenAsked: true)
+        
+        photosViewModel.choosePhotoFromCamera(with: MockCameraPermission.self)
+        
+        XCTAssertTrue(mockView.isPickPhotoFromCameraCalled)
+    }
+    
+    func testShouldAskViewToPickFromCameraWhenAuthorised() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockCameraPermission.setStatus(.authorized, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromCamera(with: MockCameraPermission.self)
+        
+        XCTAssertTrue(mockView.isPickPhotoFromCameraCalled)
+    }
+    
+    func testShouldShowAlertRequiringCameraPermissionOnDenied() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockCameraPermission.setStatus(.denied, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromCamera(with: MockCameraPermission.self)
+        
+        XCTAssertTrue(mockView.isShowALertCalled)
+        XCTAssert(mockView.alertTitle == "Permission Required".localised)
+        XCTAssert(mockView.alertMessage == "Please go to Setting and provide Camera Permission".localised)
+    }
+    
+    //MARK: PhotoLibrary Access and Pick from Camera Tests
+    func testShouldAskForPhotoLibraryPermissionWhenNotDetermined() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockPhotoLibraryPermission.setStatus(.notDetermined, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromGallary(with: MockPhotoLibraryPermission.self)
+        
+        XCTAssertTrue(MockPhotoLibraryPermission.isPhotoLibraryAccessRequested)
+    }
+    
+    func testShouldNotDoAnythingWhenPhotoLibraryAccessIsRequestedAndDenied() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockPhotoLibraryPermission.setStatus(.notDetermined, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromGallary(with: MockPhotoLibraryPermission.self)
+        
+        XCTAssertFalse(mockView.isPickPhotoFromGallaryCalled)
+    }
+    
+    func testShouldAskViewToPickFromGallaryWhenGranted() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockPhotoLibraryPermission.setStatus(.notDetermined, grantedWhenAsked: true)
+        
+        photosViewModel.choosePhotoFromGallary(with: MockPhotoLibraryPermission.self)
+        
+        XCTAssertTrue(mockView.isPickPhotoFromGallaryCalled)
+    }
+    
+    func testShouldAskViewToPickFromGallaryWhenAuthorised() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockPhotoLibraryPermission.setStatus(.authorized, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromGallary(with: MockPhotoLibraryPermission.self)
+        
+        XCTAssertTrue(mockView.isPickPhotoFromGallaryCalled)
+    }
+    
+    func testShouldShowAlertRequiringPhotoLibraryPermissionOnDenied() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: photos(), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        
+        MockPhotoLibraryPermission.setStatus(.denied, grantedWhenAsked: false)
+        
+        photosViewModel.choosePhotoFromGallary(with: MockPhotoLibraryPermission.self)
+        
+        XCTAssertTrue(mockView.isShowALertCalled)
+        XCTAssert(mockView.alertTitle == "Permission Required".localised)
+        XCTAssert(mockView.alertMessage == "Please go to Setting and provide Photo Library Permission".localised)
+    }
     
     private func photos() -> [Photo] {
         let photo1 = Photo(photoId: "photoId1", width: 1, height: 2)

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E31C67A6214EAD430058557E /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31C67A5214EAD430058557E /* Localization.swift */; };
+		E31C67AC214EAE020058557E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E31C67AB214EAE020058557E /* Localizable.strings */; };
+		E31C67AE214EB5DC0058557E /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31C67AD214EB5DC0058557E /* Permission.swift */; };
+		E31C67B0214EC24A0058557E /* MockPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31C67AF214EC24A0058557E /* MockPermissions.swift */; };
 		E3D031FA214BDECA00EAAC3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D031F9214BDECA00EAAC3D /* AppDelegate.swift */; };
 		E3D031FF214BDECA00EAAC3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D031FD214BDECA00EAAC3D /* Main.storyboard */; };
 		E3D03201214BDECA00EAAC3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D03200214BDECA00EAAC3D /* Assets.xcassets */; };
@@ -55,6 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E31C67A5214EAD430058557E /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		E31C67AB214EAE020058557E /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		E31C67AD214EB5DC0058557E /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		E31C67AF214EC24A0058557E /* MockPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPermissions.swift; sourceTree = "<group>"; };
 		E3D031F6214BDECA00EAAC3D /* PhotosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D031F9214BDECA00EAAC3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3D031FE214BDECA00EAAC3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -145,6 +153,7 @@
 				E3D03200214BDECA00EAAC3D /* Assets.xcassets */,
 				E3D03202214BDECA00EAAC3D /* LaunchScreen.storyboard */,
 				E3D03205214BDECA00EAAC3D /* Info.plist */,
+				E31C67AB214EAE020058557E /* Localizable.strings */,
 			);
 			path = PhotosApp;
 			sourceTree = "<group>";
@@ -269,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D03247214BF5E800EAAC3D /* Constants.swift */,
+				E31C67A5214EAD430058557E /* Localization.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -337,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D03265214C0CFB00EAAC3D /* MockPhotosView.swift */,
+				E31C67AF214EC24A0058557E /* MockPermissions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -363,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D0326E214C1B4C00EAAC3D /* MozaicLayout.swift */,
+				E31C67AD214EB5DC0058557E /* Permission.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -449,6 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D03204214BDECA00EAAC3D /* LaunchScreen.storyboard in Resources */,
+				E31C67AC214EAE020058557E /* Localizable.strings in Resources */,
 				E3D03201214BDECA00EAAC3D /* Assets.xcassets in Resources */,
 				E3D031FF214BDECA00EAAC3D /* Main.storyboard in Resources */,
 			);
@@ -470,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D0323E214BED8900EAAC3D /* Photo.swift in Sources */,
+				E31C67A6214EAD430058557E /* Localization.swift in Sources */,
 				E3D0326C214C138500EAAC3D /* PhotoCell.swift in Sources */,
 				E3D0321B214BE02F00EAAC3D /* BaseNetworkClient.swift in Sources */,
 				E3D0322E214BE71A00EAAC3D /* NetworkableImageView.swift in Sources */,
@@ -481,6 +495,7 @@
 				E3D0325D214C085000EAAC3D /* PhotoViewModel.swift in Sources */,
 				E3D031FA214BDECA00EAAC3D /* AppDelegate.swift in Sources */,
 				E3D03242214BF1A300EAAC3D /* PhotosAPI.swift in Sources */,
+				E31C67AE214EB5DC0058557E /* Permission.swift in Sources */,
 				E3D0326A214C136900EAAC3D /* PhotosViewController.swift in Sources */,
 				E3D03245214BF5B900EAAC3D /* PhotosEndPoints.swift in Sources */,
 				E3D0326F214C1B4C00EAAC3D /* MozaicLayout.swift in Sources */,
@@ -498,6 +513,7 @@
 				E3D0324E214BF96D00EAAC3D /* PhotosAPITests.swift in Sources */,
 				E3D03234214BE7D300EAAC3D /* MockCacheableClient.swift in Sources */,
 				E3D03258214BFF1C00EAAC3D /* ServiceResponseTests.swift in Sources */,
+				E31C67B0214EC24A0058557E /* MockPermissions.swift in Sources */,
 				E3D03256214BFE9E00EAAC3D /* PhotoTests.swift in Sources */,
 				E3D0320F214BDECB00EAAC3D /* PhotosAppTests.swift in Sources */,
 				E3D03254214BFDFE00EAAC3D /* APIErrorTests.swift in Sources */,
@@ -544,6 +560,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -604,6 +621,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

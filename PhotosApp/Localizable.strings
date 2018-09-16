@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  PhotosApp
+
+  Created by Srinivas Dodda on 16/09/18.
+  Copyright © 2018 Srinivas Dodda. All rights reserved.
+*/
+"Loading..." = "Loading...";
+"Something went wrong. Try again later" = "Something went wrong. Try again later";
+"Pick Photo from" = "Pick Photo from";
+"Gallary" = "Gallary";
+"Camera" = "Camera";
+"Cancel" = "Cancel";
+"OK" = "OK";
+"Permission Required" = "Permission Required";
+"Please go to Setting and provide Photo Library Permission" = "Please go to Setting and provide Photo Library Permission";
+"Please go to Setting and provide Camera Permission" = "Please go to Setting and provide Camera Permission";

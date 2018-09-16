@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g9N-Vd-al9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -70,7 +70,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Photos" id="QXS-fH-o0W"/>
+                    <navigationItem key="navigationItem" title="Photos" id="QXS-fH-o0W">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="r4N-en-Kpi">
+                            <connections>
+                                <action selector="showPhotoSourceChooser:" destination="BYZ-38-t0r" id="vVW-zd-ffg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="messageLabel" destination="tar-a8-srl" id="D3a-BV-dXQ"/>
                         <outlet property="photosCollectionView" destination="RV2-dk-aaw" id="qoL-gU-8WB"/>

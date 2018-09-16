@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Photos
+import AVFoundation
 
-class PhotosViewController: UIViewController, PhotosView {
+class PhotosViewController: UIViewController  {
     
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var messageLabel: UILabel!
@@ -21,21 +23,39 @@ class PhotosViewController: UIViewController, PhotosView {
         photosViewModel = PhotosViewModel(photosView: self)
         photosViewModel.loadPhotos()
     }
+    
+    
 }
 
-extension PhotosViewController {
-    
+//MARK: View Methods
+extension PhotosViewController: PhotosView {
+
     func showPhotos() {
         messageLabel.isHidden = true
         photosCollectionView.reloadData()
     }
     
-    func showMessage(message: String) {
+    func showMessage(_ message: String) {
         messageLabel.text = message
         messageLabel.isHidden = false
     }
+    
+    func showALertTitle(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localised, style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func pickPhotoFromCamera() {
+        
+    }
+    
+    func pickPhotoFromGallary() {
+        
+    }
 }
 
+//MARK: CollectionView DataSource
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -53,6 +73,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     
 }
 
+//MARK: Mozaic Layout
 extension PhotosViewController: MozaicLayoutDelegate {
     
     func heightForItem(in collectionView: UICollectionView?, forItemWidth: CGFloat, at indexPath: IndexPath) -> CGFloat {
@@ -64,4 +85,21 @@ extension PhotosViewController: MozaicLayoutDelegate {
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         photosCollectionView.collectionViewLayout.invalidateLayout()
     }
+}
+
+//MARK: Photo Source Chooser
+extension PhotosViewController {
+    
+    @IBAction func showPhotoSourceChooser(_ sender: Any) {
+        let alert = UIAlertController(title: "Pick Photo from".localised, message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Gallary".localised, style: .default, handler: { [weak self] (_) in
+            self?.photosViewModel.choosePhotoFromGallary(with: PHPhotoLibrary.self)
+        }))
+        alert.addAction(UIAlertAction(title: "Camera".localised, style: .default, handler: { [weak self] (_) in
+            self?.photosViewModel.choosePhotoFromCamera(with: AVCaptureDevice.self)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel".localised, style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }

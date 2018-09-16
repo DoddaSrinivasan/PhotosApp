@@ -28,7 +28,7 @@ class PhotosAPITests: XCTestCase {
         
         let photosApi = PhotosAPI(httpClient: mockHttpClient)
         photosApi.getPhotos { (photos, error) in
-            XCTAssert(error?.message == "Something went wrong try again later")
+            XCTAssert(error?.message == "Something went wrong. Try again later".localised)
         }
     }
     

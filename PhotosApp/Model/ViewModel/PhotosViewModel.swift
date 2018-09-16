@@ -6,11 +6,13 @@
 //  Copyright © 2018 Srinivas Dodda. All rights reserved.
 //
 
-import Foundation
-
 protocol PhotosView {
     func showPhotos()
-    func showMessage(message: String)
+    func showMessage(_ message: String)
+    func showALertTitle(_ title: String, message: String)
+    
+    func pickPhotoFromCamera()
+    func pickPhotoFromGallary()
 }
 
 class PhotosViewModel {
@@ -36,9 +38,10 @@ class PhotosViewModel {
     }
     
     func loadPhotos() {
+        self.photosView.showMessage("Loading...".localised)
         photosApi.getPhotos { [weak self] (photos, error) in
             guard error == nil else {
-                self?.photosView.showMessage(message: error?.message ?? "Something went wrong")
+                self?.photosView.showMessage(error?.message ?? "Something went wrong. Try again later".localised)
                 return
             }
             
@@ -51,6 +54,43 @@ class PhotosViewModel {
                     let aspectRatio = Float(photo.height!)/Float(photo.width!)
                     return PhotoViewModel(photoUrl: url, aspectRatio: aspectRatio)
                 })
+        }
+    }
+}
+
+extension PhotosViewModel {
+    
+    func choosePhotoFromGallary(with permission: PhotoLibraryPermission.Type) {
+        switch permission.authorizationStatus() {
+        case .authorized:
+            photosView.pickPhotoFromGallary()
+        case .notDetermined:
+            permission.requestAccess { [weak self] granted in
+                if granted {
+                    self?.photosView.pickPhotoFromGallary()
+                }
+            }
+        case .denied:
+            photosView.showALertTitle("Permission Required".localised, message: "Please go to Setting and provide Photo Library Permission".localised)
+        case .restricted:
+            return
+        }
+    }
+    
+    func choosePhotoFromCamera(with permission: CameraPermission.Type) {
+        switch permission.cameraAuthorizationStatus() {
+        case .authorized:
+            photosView.pickPhotoFromCamera()
+        case .notDetermined:
+            permission.requestCameraAccess { [weak self] granted in
+                if granted {
+                    self?.photosView.pickPhotoFromCamera()
+                }
+            }
+        case .denied:
+            photosView.showALertTitle("Permission Required".localised, message: "Please go to Setting and provide Camera Permission".localised)
+        case .restricted:
+            return
         }
     }
     

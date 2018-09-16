@@ -28,7 +28,7 @@ class PhotosAPI: PhotosAPIProtocol {
         let photosUrl = PhotosEndPoints().getPhotosEndPoint()
         self.httpClient.get(url: photosUrl, type: ServiceResponse<[Photo]>.self) { (response, error) in
             guard let data = response, error == nil else {
-                callback(nil, APIError(message: "Something went wrong try again later"))
+                callback(nil, APIError(message: "Something went wrong. Try again later".localised))
                 return
             }
             
