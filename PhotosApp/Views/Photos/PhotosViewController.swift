@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import AVFoundation
+import MobileCoreServices
 
 class PhotosViewController: UIViewController  {
     
@@ -47,11 +48,24 @@ extension PhotosViewController: PhotosView {
     }
     
     func pickPhotoFromCamera() {
-        
+        showPicker(sourceType: .camera)
     }
     
     func pickPhotoFromGallary() {
+        showPicker(sourceType: .photoLibrary)
+    }
+    
+    private func showPicker(sourceType: UIImagePickerControllerSourceType) {
+        guard UIImagePickerController.isSourceTypeAvailable(sourceType) else {
+            return
+        }
         
+        let pickerController = UIImagePickerController()
+        pickerController.sourceType = sourceType
+        pickerController.mediaTypes = [kUTTypeImage as String]
+        pickerController.allowsEditing = true
+        pickerController.delegate = self
+        present(pickerController, animated: true)
     }
 }
 
@@ -88,7 +102,7 @@ extension PhotosViewController: MozaicLayoutDelegate {
 }
 
 //MARK: Photo Source Chooser
-extension PhotosViewController {
+extension PhotosViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBAction func showPhotoSourceChooser(_ sender: Any) {
         let alert = UIAlertController(title: "Pick Photo from".localised, message: "", preferredStyle: .actionSheet)
@@ -100,6 +114,24 @@ extension PhotosViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel".localised, style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        defer {
+            picker.dismiss(animated: true)
+        }
+        
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
+            return
+        }
+        
+        photosViewModel.uploadImage(image)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        defer {
+            picker.dismiss(animated: true)
+        }
     }
     
 }

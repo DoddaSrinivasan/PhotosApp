@@ -6,6 +6,8 @@
 //  Copyright © 2018 Srinivas Dodda. All rights reserved.
 //
 
+import UIKit
+
 protocol PhotosView {
     func showPhotos()
     func showMessage(_ message: String)
@@ -55,6 +57,10 @@ class PhotosViewModel {
                     return PhotoViewModel(photoUrl: url, aspectRatio: aspectRatio)
                 })
         }
+    }
+    
+    func uploadImage(_ image: UIImage) {
+        
     }
 }
 
