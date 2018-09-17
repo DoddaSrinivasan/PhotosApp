@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RV2-dk-aaw">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="2" y="64" width="373" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewLayout key="collectionViewLayout" id="EXe-c6-PqE" customClass="MozaicLayout" customModule="PhotosApp" customModuleProvider="target"/>
                                 <cells>
@@ -30,7 +30,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g9N-Vd-al9">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g9N-Vd-al9">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
                                             </subviews>
@@ -61,7 +61,7 @@
                         <constraints>
                             <constraint firstItem="tar-a8-srl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9y8-40-E1X"/>
                             <constraint firstItem="tar-a8-srl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="H9h-ku-P7U"/>
-                            <constraint firstItem="RV2-dk-aaw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VH7-cF-vRA"/>
+                            <constraint firstItem="RV2-dk-aaw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="2" id="VH7-cF-vRA"/>
                             <constraint firstItem="RV2-dk-aaw" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="aOM-t4-prM"/>
                             <constraint firstItem="RV2-dk-aaw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bRV-xW-gAx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tar-a8-srl" secondAttribute="trailing" constant="20" id="loY-mY-g0Y"/>

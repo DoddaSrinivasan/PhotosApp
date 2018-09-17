@@ -90,6 +90,9 @@ fileprivate class Column {
     private let index: Int
     var itemsBounds: [CGRect]
     
+    let lineGap = 2
+    let cellGap = CGFloat(2)
+    
     init(index: Int) {
         self.index = index
         self.itemsBounds = []
@@ -106,8 +109,8 @@ fileprivate class Column {
         
         let lastItemY = lastItem.origin.y
         let lastItemHeight = lastItem.size.height
-        let newItemY = lastItemY + lastItemHeight
-        let itemToAdd = CGRect(x: x, y: newItemY, width: width, height: height)
+        let newItemY = lastItemY + lastItemHeight + 1
+        let itemToAdd = CGRect(x: x, y: newItemY, width: width - cellGap, height: height)
         itemsBounds.append(itemToAdd)
     }
     
