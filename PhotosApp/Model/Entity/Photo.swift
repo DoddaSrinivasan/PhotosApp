@@ -16,6 +16,10 @@ struct Photo {
     enum CodingKeys: String, CodingKey {
         case photoId, width, height
     }
+    
+    func isValid() -> Bool {
+        return photoId != nil && width != nil && height != nil
+    }
 }
 
 extension Photo: Decodable {

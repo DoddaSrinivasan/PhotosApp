@@ -10,6 +10,7 @@ import Foundation
 
 protocol PhotosAPIProtocol {
     func getPhotos(callback: @escaping ( _ photos: [Photo]?, _ error: APIError?) -> Void)
+    func uploadPhoto(_ imageData: Data, name: String, callback: @escaping (Photo?, APIError?) -> Void)
 }
 
 class PhotosAPI: PhotosAPIProtocol {
@@ -27,17 +28,31 @@ class PhotosAPI: PhotosAPIProtocol {
     func getPhotos(callback: @escaping ([Photo]?, APIError?) -> Void) {
         let photosUrl = PhotosEndPoints().getPhotosEndPoint()
         self.httpClient.get(url: photosUrl, type: ServiceResponse<[Photo]>.self) { (response, error) in
-            guard let data = response, error == nil else {
-                callback(nil, APIError(message: "Something went wrong. Try again later".localised))
-                return
-            }
-            
-            guard data.error == nil else {
-                callback(nil, data.error)
-                return
-            }
-            
-            callback(data.content, nil)
+            self.handleData(response: response, error: error, callback: callback)
         }
+    }
+    
+    func uploadPhoto(_ imageData: Data, name: String, callback: @escaping (Photo?, APIError?) -> Void) {
+        let photosUrl = PhotosEndPoints().getPhotosEndPoint()
+        let multiPartBuilder = MultiPartBuilder()
+        let multiPartData = multiPartBuilder.addImage(name: "file", content: imageData, fileName: name).build()!
+        let headers = ["Content-Type": "multipart/form-data; boundary=\(multiPartBuilder.boundary)"]
+        self.httpClient.post(url: photosUrl, body: multiPartData, headers: headers, type: ServiceResponse<Photo>.self) { (response, error) in
+            self.handleData(response: response, error: error, callback: callback)
+        }
+    }
+    
+    func handleData<T: Decodable>(response: ServiceResponse<T>?, error: Error?, callback: @escaping (T?, APIError?) -> Void) {
+        guard let data = response, error == nil else {
+            callback(nil, APIError(message: "Something went wrong. Try again later".localised))
+            return
+        }
+        
+        guard data.error == nil else {
+            callback(nil, data.error)
+            return
+        }
+        
+        callback(data.content, nil)
     }
 }

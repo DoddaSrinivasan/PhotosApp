@@ -49,7 +49,7 @@ class PhotosViewModel {
             
             self?.photos = (photos ?? [])
                 .filter({ (photo) -> Bool in
-                    return photo.photoId != nil && photo.width != nil && photo.height != nil
+                    return photo.isValid()
                 })
                 .map({ (photo) -> PhotoViewModel in
                     let url = self?.imagesEndpoints.imageEndpoint(imageId: photo.photoId!)

@@ -25,7 +25,6 @@ class PhotosViewController: UIViewController  {
         photosViewModel.loadPhotos()
     }
     
-    
 }
 
 //MARK: View Methods
