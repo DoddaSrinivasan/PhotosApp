@@ -59,8 +59,20 @@ class PhotosViewModel {
         }
     }
     
-    func uploadImage(_ imageData: Data) {
-        
+    func uploadImage(_ imageData: Data, name: String) {
+        photosApi.uploadPhoto(imageData, name: name) { [weak self] (photo, error) in
+            guard error == nil,
+                let photo = photo,
+                photo.isValid() else {
+                self?.photosView.showALertTitle("Upload Failed".localised,
+                                                message: error?.message ?? "Something went wrong. Try again later".localised)
+                return
+            }
+            
+            let url = self?.imagesEndpoints.imageEndpoint(imageId: photo.photoId!)
+            let aspectRatio = Float(photo.height!)/Float(photo.width!)
+            self?.photos.append(PhotoViewModel(photoUrl: url, aspectRatio: aspectRatio))
+        }
     }
 }
 

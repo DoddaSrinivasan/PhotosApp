@@ -61,6 +61,46 @@ class PhotosViewModelTests: XCTestCase {
         XCTAssert(photosViewModel.photos[2].photoUrl?.absoluteString == "http://host/images/photoId3.png")
     }
     
+    //MARK: UploadPhoto
+    func testShouldShowErrorMessageOnUploadFailed() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: nil, apiError: APIError(message: "Some Error"))
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        photosViewModel.uploadImage(Data(), name: "SomeImage.png")
+        
+        XCTAssertTrue(mockView.isShowALertCalled)
+        XCTAssert(mockView.alertTitle == "Upload Failed".localised)
+        XCTAssert(mockView.alertMessage == "Some Error")
+    }
+    
+    func testShouldShowErrorMessageOnUploadInvalid() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<Photo>(data: Photo(photoId: "PhotoId", width: nil, height: 200), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        photosViewModel.uploadImage(Data(), name: "SomeImage.png")
+        
+        XCTAssertTrue(mockView.isShowALertCalled)
+        XCTAssert(mockView.alertTitle == "Upload Failed".localised)
+        XCTAssert(mockView.alertMessage == "Something went wrong. Try again later".localised)
+    }
+    
+    func testShouldShowPhotosOnUploadSuccess() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<Photo>(data: Photo(photoId: "PhotoId", width: 100, height: 200), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        photosViewModel.uploadImage(Data(), name: "SomeImage.png")
+
+        
+        XCTAssert(mockView.isShowPhotosCalled)
+        XCTAssert(photosViewModel.photos.count == 1)
+    }
+    
     
     //MARK: Camera Access and Pick from Camera Tests
     func testShouldAskForCameraPermissionWhenNotDetermined() {

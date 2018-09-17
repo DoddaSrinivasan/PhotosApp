@@ -121,11 +121,12 @@ extension PhotosViewController: UIImagePickerControllerDelegate, UINavigationCon
         }
         
         guard let image = info[UIImagePickerControllerEditedImage] as? UIImage,
+            let imageName = (info[UIImagePickerControllerImageURL] as? URL)?.lastPathComponent,
             let imageData = UIImagePNGRepresentation(image) else {
             return
         }
         
-        photosViewModel.uploadImage(imageData)
+        photosViewModel.uploadImage(imageData, name: imageName)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
