@@ -10,7 +10,7 @@ import Foundation
 
 protocol PhotosAPIProtocol {
     func getPhotos(callback: @escaping ( _ photos: [Photo]?, _ error: APIError?) -> Void)
-    func uploadPhoto(_ imageData: Data, name: String, callback: @escaping (Photo?, APIError?) -> Void)
+    func uploadPhoto(_ imageData: Data, callback: @escaping (Photo?, APIError?) -> Void)
 }
 
 class PhotosAPI: PhotosAPIProtocol {
@@ -32,10 +32,10 @@ class PhotosAPI: PhotosAPIProtocol {
         }
     }
     
-    func uploadPhoto(_ imageData: Data, name: String, callback: @escaping (Photo?, APIError?) -> Void) {
+    func uploadPhoto(_ imageData: Data, callback: @escaping (Photo?, APIError?) -> Void) {
         let photosUrl = PhotosEndPoints().getPhotosEndPoint()
         let multiPartBuilder = MultiPartBuilder()
-        let multiPartData = multiPartBuilder.addImage(name: "file", content: imageData, fileName: name).build()!
+        let multiPartData = multiPartBuilder.addImage(name: "file", content: imageData, fileName: "image.png").build()!
         let headers = ["Content-Type": "multipart/form-data; boundary=\(multiPartBuilder.boundary)"]
         self.httpClient.post(url: photosUrl, body: multiPartData, headers: headers, type: ServiceResponse<Photo>.self) { (response, error) in
             self.handleData(response: response, error: error, callback: callback)

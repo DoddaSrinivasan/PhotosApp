@@ -10,6 +10,7 @@ import UIKit
 import Photos
 import AVFoundation
 import MobileCoreServices
+import CropViewController
 
 class PhotosViewController: UIViewController  {
     
@@ -62,7 +63,7 @@ extension PhotosViewController: PhotosView {
         let pickerController = UIImagePickerController()
         pickerController.sourceType = sourceType
         pickerController.mediaTypes = [kUTTypeImage as String]
-        pickerController.allowsEditing = true
+        pickerController.allowsEditing = false
         pickerController.delegate = self
         present(pickerController, animated: true)
     }
@@ -101,7 +102,7 @@ extension PhotosViewController: MozaicLayoutDelegate {
 }
 
 //MARK: Photo Source Chooser
-extension PhotosViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension PhotosViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
     
     @IBAction func showPhotoSourceChooser(_ sender: Any) {
         let alert = UIAlertController(title: "Pick Photo from".localised, message: "", preferredStyle: .actionSheet)
@@ -116,23 +117,29 @@ extension PhotosViewController: UIImagePickerControllerDelegate, UINavigationCon
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        defer {
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
             picker.dismiss(animated: true)
-        }
-        
-        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage,
-            let imageName = (info[UIImagePickerControllerImageURL] as? URL)?.lastPathComponent,
-            let imageData = UIImagePNGRepresentation(image) else {
             return
         }
         
-        photosViewModel.uploadImage(imageData, name: imageName)
+        let cropViewController = CropViewController(image: image)
+        cropViewController.delegate = self
+        
+        picker.present(cropViewController, animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        defer {
-            picker.dismiss(animated: true)
+        picker.dismiss(animated: true)
+    }
+    
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.presentingViewController?.presentingViewController?.dismiss(animated: true)
+        
+        guard let imageData = UIImagePNGRepresentation(image) else {
+            return
         }
+        
+        photosViewModel.uploadImage(imageData)
     }
     
 }

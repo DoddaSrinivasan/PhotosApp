@@ -15,7 +15,6 @@ class MockPhotosAPI<T>: PhotosAPIProtocol {
     private (set) var apiError: APIError?
     
     private (set) var imageData: Data?
-    private (set) var name: String?
     
     init(data: T?, apiError: APIError?) {
         self.data = data
@@ -26,9 +25,8 @@ class MockPhotosAPI<T>: PhotosAPIProtocol {
         callback(data as? [Photo], apiError)
     }
     
-    func uploadPhoto(_ imageData: Data, name: String, callback: @escaping (Photo?, APIError?) -> Void) {
+    func uploadPhoto(_ imageData: Data, callback: @escaping (Photo?, APIError?) -> Void) {
         self.imageData = imageData
-        self.name = name
         callback(data as? Photo, apiError)
     }
 }

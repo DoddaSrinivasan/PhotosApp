@@ -49,7 +49,7 @@ class PhotosAPITests: XCTestCase {
         let mockHttpClient = MockHttpClient(data: nil, error: nil)
         
         let photosApi = PhotosAPI(httpClient: mockHttpClient)
-        photosApi.uploadPhoto(imageData, name: "SomeImage.png") { (photo, error) in
+        photosApi.uploadPhoto(imageData) { (photo, error) in
             
         }
         
@@ -82,7 +82,7 @@ class PhotosAPITests: XCTestCase {
         let mockHttpClient = MockHttpClient(data: data, error: nil)
         
         let photosApi = PhotosAPI(httpClient: mockHttpClient)
-        photosApi.uploadPhoto(Data(), name: "image.png") { (photo, apiError) in
+        photosApi.uploadPhoto(Data()) { (photo, apiError) in
             XCTAssert(photo?.photoId == "photoId")
             XCTAssert(photo?.width == 100)
             XCTAssert(photo?.height == 200)

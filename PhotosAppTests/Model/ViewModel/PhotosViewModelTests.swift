@@ -68,7 +68,7 @@ class PhotosViewModelTests: XCTestCase {
         let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
         
         let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
-        photosViewModel.uploadImage(Data(), name: "SomeImage.png")
+        photosViewModel.uploadImage(Data())
         
         XCTAssertTrue(mockView.isShowALertCalled)
         XCTAssert(mockView.alertTitle == "Upload Failed".localised)
@@ -81,7 +81,7 @@ class PhotosViewModelTests: XCTestCase {
         let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
         
         let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
-        photosViewModel.uploadImage(Data(), name: "SomeImage.png")
+        photosViewModel.uploadImage(Data())
         
         XCTAssertTrue(mockView.isShowALertCalled)
         XCTAssert(mockView.alertTitle == "Upload Failed".localised)
@@ -94,7 +94,7 @@ class PhotosViewModelTests: XCTestCase {
         let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
         
         let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
-        photosViewModel.uploadImage(Data(), name: "SomeImage.png")
+        photosViewModel.uploadImage(Data())
 
         
         XCTAssert(mockView.isShowPhotosCalled)

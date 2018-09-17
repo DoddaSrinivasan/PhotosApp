@@ -59,8 +59,8 @@ class PhotosViewModel {
         }
     }
     
-    func uploadImage(_ imageData: Data, name: String) {
-        photosApi.uploadPhoto(imageData, name: name) { [weak self] (photo, error) in
+    func uploadImage(_ imageData: Data) {
+        photosApi.uploadPhoto(imageData) { [weak self] (photo, error) in
             guard error == nil,
                 let photo = photo,
                 photo.isValid() else {
