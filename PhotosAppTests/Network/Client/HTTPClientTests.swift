@@ -28,6 +28,13 @@ class HTTPClientTests: XCTestCase {
             XCTAssertNotNil(httpError)
             XCTAssert(httpError! == NetworkErrors.MalFormedUrlError)
         }
+        
+        httpClient.post(url: url, body: Data(), headers: [:], type: SampleResponse.self) { (data, error) in
+            let httpError = error as? NetworkErrors
+            XCTAssertNil(data)
+            XCTAssertNotNil(httpError)
+            XCTAssert(httpError! == NetworkErrors.MalFormedUrlError)
+        }
     }
     
     func testShouldNotMakeNetworkCallForMalformedUrl() {
@@ -38,25 +45,54 @@ class HTTPClientTests: XCTestCase {
         let httpClient = HttpClient(session: mockSession)
         
         httpClient.get(url: url, type: SampleResponse.self) { (data, error) in}
+        httpClient.post(url: url, body: Data(), headers: [:], type: SampleResponse.self) { (data, error) in}
         
-        XCTAssertNil(mockSession.url)
+        XCTAssertNil(mockSession.urlRequest?.url)
         XCTAssert(!mockDataTask.isResumeCalled)
         XCTAssert(!mockSession.isfinishTasksAndInvalidateCalled)
+    }
+    
+    func testShouldMakeGetRequest() {
+        let mockUrlString = "http://someurl.com"
+        let url = URL(string: mockUrlString)
+        let mockDataTask = MockUrlSessionDataTask()
+        let mockSession = MockUrlSession(data: nil, error:nil, dataTask: mockDataTask)
+        let httpClient = HttpClient(session: mockSession)
+        
+        httpClient.get(url: url, type: SampleResponse.self) { (data, error) in}
+        
+        XCTAssert(mockSession.urlRequest?.httpMethod == "GET")
+    }
+    
+    func testShouldMakePostRequest() {
+        let mockUrlString = "http://someurl.com"
+        let url = URL(string: mockUrlString)
+        let mockDataTask = MockUrlSessionDataTask()
+        let mockSession = MockUrlSession(data: nil, error:nil, dataTask: mockDataTask)
+        let httpClient = HttpClient(session: mockSession)
+        
+        httpClient.post(url: url, body: Data(), headers: ["KEY": "VALUE"], type: SampleResponse.self) { (data, error) in}
+        
+        XCTAssert(mockSession.urlRequest?.httpMethod == "POST")
+        XCTAssert(mockSession.urlRequest?.value(forHTTPHeaderField: "KEY") == "VALUE")
+        XCTAssertNotNil(mockSession.urlRequest?.httpBody)
     }
     
     func testShouldCompleteWithErrorIfDataIsNil() {
         let mockUrlString = "http://someurl.com"
         let url = URL(string: mockUrlString)
+        let request = URLRequest(url: url!)
+        
         let mockDataTask = MockUrlSessionDataTask()
         let mockSession = MockUrlSession(data: nil, error:NSError(domain: "DOMAIN", code: 0, userInfo:nil), dataTask: mockDataTask)
         let httpClient = HttpClient(session: mockSession)
         
-        httpClient.get(url: url, type: SampleResponse.self) { (data, error) in
+        httpClient.execute(request: request, type: SampleResponse.self) { (data, error) in
             XCTAssertNil(data)
             XCTAssertNotNil(error)
         }
         
-        XCTAssert(mockSession.url!.absoluteString == mockUrlString)
+        XCTAssert(mockSession.urlRequest?.url!.absoluteString == mockUrlString)
         XCTAssert(mockDataTask.isResumeCalled)
         XCTAssert(mockSession.isfinishTasksAndInvalidateCalled)
     }
@@ -64,20 +100,21 @@ class HTTPClientTests: XCTestCase {
     func testShouldCompleteWithErrorIfDataIsNotJsonJSONSerializable() {
         let mockUrlString = "http://someurl.com"
         let url = URL(string: mockUrlString)
+        let request = URLRequest(url: url!)
         let mockDataTask = MockUrlSessionDataTask()
         let mockSession = MockUrlSession(data: "Some Data".data(using: .utf8),
                                          error: nil,
                                          dataTask: mockDataTask)
         let httpClient = HttpClient(session: mockSession)
         
-        httpClient.get(url: url, type: SampleResponse.self) { (data, error) in
+        httpClient.execute(request: request, type: SampleResponse.self) { (data, error) in
             let httpError = error as? NetworkErrors
             XCTAssertNil(data)
             XCTAssertNotNil(httpError)
             XCTAssert(httpError! == NetworkErrors.DataDeSerilizationError)
         }
         
-        XCTAssert(mockSession.url!.absoluteString == mockUrlString)
+        XCTAssert(mockSession.urlRequest?.url!.absoluteString == mockUrlString)
         XCTAssert(mockDataTask.isResumeCalled)
         XCTAssert(mockSession.isfinishTasksAndInvalidateCalled)
     }
@@ -85,18 +122,19 @@ class HTTPClientTests: XCTestCase {
     func testShouldCompleteWithData() {
         let mockUrlString = "http://someurl.com"
         let url = URL(string: mockUrlString)
+        let request = URLRequest(url: url!)
         let mockDataTask = MockUrlSessionDataTask()
         let mockSession = MockUrlSession(data: "{}".data(using: .utf8),
                                          error: nil,
                                          dataTask: mockDataTask)
         let httpClient = HttpClient(session: mockSession)
         
-        httpClient.get(url: url, type: SampleResponse.self) { (data, error) in
+        httpClient.execute(request: request, type: SampleResponse.self) { (data, error) in
             XCTAssertNotNil(data)
             XCTAssertNil(error)
         }
         
-        XCTAssert(mockSession.url!.absoluteString == mockUrlString)
+        XCTAssert(mockSession.urlRequest?.url!.absoluteString == mockUrlString)
         XCTAssert(mockDataTask.isResumeCalled)
         XCTAssert(mockSession.isfinishTasksAndInvalidateCalled)
     }

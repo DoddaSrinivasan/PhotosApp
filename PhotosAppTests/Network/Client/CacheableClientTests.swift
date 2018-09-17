@@ -43,7 +43,7 @@ class CacheableClientTests: XCTestCase {
         
         cacheableClient.downloadUrl(url: url) { (url, data, error) in }
         
-        XCTAssertNil(mockSession.url)
+        XCTAssertNil(mockSession.urlRequest?.url)
         XCTAssert(!mockDataTask.isResumeCalled)
         XCTAssert(!mockSession.isfinishTasksAndInvalidateCalled)
     }
@@ -63,7 +63,7 @@ class CacheableClientTests: XCTestCase {
             XCTAssertNotNil(responseError)
         }
         
-        XCTAssert(mockSession.url!.absoluteString == mockUrlString)
+        XCTAssert(mockSession.urlRequest?.url?.absoluteString == mockUrlString)
         XCTAssert(mockDataTask.isResumeCalled)
         XCTAssert(mockSession.isfinishTasksAndInvalidateCalled)
     }

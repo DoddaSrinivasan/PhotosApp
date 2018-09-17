@@ -12,6 +12,9 @@ import Foundation
 class MockHttpClient: HTTPClientProtocol {
     
     private (set) var url: URL?
+    private (set) var httpBody: Data?
+    private (set) var headers: [String : String]?
+    
     private let data: Decodable?
     private let error: Error?
     
@@ -22,6 +25,13 @@ class MockHttpClient: HTTPClientProtocol {
     
     func get<T: Decodable>(url: URL?, type: T.Type, callback: @escaping (T?, Error?) -> Void) {
         self.url = url
+        callback(data as? T, error)
+    }
+    
+    func post<T: Decodable>(url: URL?, body: Data, headers: [String : String], type: T.Type, callback: @escaping (T?, Error?) -> Void) {
+        self.url = url
+        self.httpBody = body
+        self.headers = headers
         callback(data as? T, error)
     }
 }

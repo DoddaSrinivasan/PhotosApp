@@ -23,6 +23,7 @@ class HttpClient: NetworkClient {
 
 protocol HTTPClientProtocol {
     func get<T: Decodable>(url: URL?, type: T.Type, callback: @escaping ( _ data: T?, _ error: Error?) -> Void)
+    func post<T: Decodable>(url: URL?, body: Data, headers: [String: String], type: T.Type, callback: @escaping ( _ data: T?, _ error: Error?) -> Void)
 }
 
 extension HttpClient: HTTPClientProtocol {
@@ -33,12 +34,28 @@ extension HttpClient: HTTPClientProtocol {
             return
         }
         
-        let request = NSMutableURLRequest(url: url!)
+        var request = URLRequest(url: url!)
         request.httpMethod = "GET"
-        get(request: request as URLRequest, type: type, callback: callback)
+        execute(request: request, type: type, callback: callback)
     }
     
-    private func get<T: Decodable>(request: URLRequest, type: T.Type, callback: @escaping ( _ data: T?, _ e: Error?) -> Void) {
+    func post<T: Decodable>(url: URL?, body: Data, headers: [String: String], type: T.Type, callback: @escaping ( _ data: T?, _ error: Error?) -> Void) {
+        guard let _ = url else {
+            callback(nil, NetworkErrors.MalFormedUrlError)
+            return
+        }
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        for (headerField, value) in headers {
+            request.addValue(value, forHTTPHeaderField: headerField)
+        }
+        request.httpBody = body
+        
+        execute(request: request, type: type, callback: callback)
+    }
+    
+    func execute<T: Decodable>(request: URLRequest, type: T.Type, callback: @escaping ( _ data: T?, _ e: Error?) -> Void) {
         let task = session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async { 
                 guard let data = data, error == nil else {

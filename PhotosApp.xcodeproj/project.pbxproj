@@ -11,6 +11,7 @@
 		E31C67AC214EAE020058557E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E31C67AB214EAE020058557E /* Localizable.strings */; };
 		E31C67AE214EB5DC0058557E /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31C67AD214EB5DC0058557E /* Permission.swift */; };
 		E31C67B0214EC24A0058557E /* MockPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31C67AF214EC24A0058557E /* MockPermissions.swift */; };
+		E31C67B6214FB1750058557E /* PhotoViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31C67B5214FB1750058557E /* PhotoViewModelTests.swift */; };
 		E3D031FA214BDECA00EAAC3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D031F9214BDECA00EAAC3D /* AppDelegate.swift */; };
 		E3D031FF214BDECA00EAAC3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D031FD214BDECA00EAAC3D /* Main.storyboard */; };
 		E3D03201214BDECA00EAAC3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D03200214BDECA00EAAC3D /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		E31C67AB214EAE020058557E /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		E31C67AD214EB5DC0058557E /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		E31C67AF214EC24A0058557E /* MockPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPermissions.swift; sourceTree = "<group>"; };
+		E31C67B5214FB1750058557E /* PhotoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModelTests.swift; sourceTree = "<group>"; };
 		E3D031F6214BDECA00EAAC3D /* PhotosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D031F9214BDECA00EAAC3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3D031FE214BDECA00EAAC3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D03262214C0CD000EAAC3D /* PhotosViewModelTests.swift */,
+				E31C67B5214FB1750058557E /* PhotoViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				E3D0320F214BDECB00EAAC3D /* PhotosAppTests.swift in Sources */,
 				E3D03254214BFDFE00EAAC3D /* APIErrorTests.swift in Sources */,
 				E3D03225214BE11A00EAAC3D /* HTTPClientTests.swift in Sources */,
+				E31C67B6214FB1750058557E /* PhotoViewModelTests.swift in Sources */,
 				E3D03230214BE74A00EAAC3D /* CacheableClientTests.swift in Sources */,
 				E3D0324B214BF76500EAAC3D /* PhotosEndPointsTests.swift in Sources */,
 				E3D03266214C0CFB00EAAC3D /* MockPhotosView.swift in Sources */,

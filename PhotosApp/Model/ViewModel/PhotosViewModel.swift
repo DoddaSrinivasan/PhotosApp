@@ -59,7 +59,7 @@ class PhotosViewModel {
         }
     }
     
-    func uploadImage(_ image: UIImage) {
+    func uploadImage(_ imageData: Data) {
         
     }
 }
