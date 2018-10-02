@@ -90,7 +90,7 @@ extension PhotosViewController: PhotosView {
 }
 
 //MARK: CollectionView DataSource
-extension PhotosViewController: UICollectionViewDataSource {
+extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photosViewModel.photos.count
@@ -103,6 +103,12 @@ extension PhotosViewController: UICollectionViewDataSource {
         (cell as? PhotoCell)?.set(photoViewModel: photoViewModel)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let previewViewController = PhotoPreviewViewController.controller(photos: photosViewModel.photos,
+                                                                          selectedIndex: indexPath.item)
+        self.navigationController?.pushViewController(previewViewController, animated: true)
     }
     
 }
