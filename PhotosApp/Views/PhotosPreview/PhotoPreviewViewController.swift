@@ -35,6 +35,24 @@ class PhotoPreviewViewController: UIViewController {
         photosPreviewViewModel.syncronizePhotos()
         photosPreviewViewModel.syncronizePageIndicator()
     }
+    
+    @IBAction func sharePhoto(_ sender: Any) {
+        guard let index = currentVisibleIndex(),
+            let cell = self.photosPreviewCollectionView.cellForItem(at: IndexPath(item: index, section: 0)),
+            let image = (cell as! PhotoPreviewCell).photoImage.image else{
+            return
+        }
+        
+        shareImages([image])
+    }
+    
+    
+    private func currentVisibleIndex() -> Int? {
+        var point = self.photosPreviewCollectionView.contentOffset
+        point.x = point.x + self.view.center.x
+        let indexPath = self.photosPreviewCollectionView.indexPathForItem(at: point)
+        return indexPath?.item
+    }
 }
 
 extension PhotoPreviewViewController: PhotosPreviewView {
@@ -53,10 +71,8 @@ extension PhotoPreviewViewController: PhotosPreviewView {
 
 extension PhotoPreviewViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        var point = scrollView.contentOffset
-        point.x = point.x + self.view.center.x
-        if let indexPath = self.photosPreviewCollectionView.indexPathForItem(at: point) {
-            photosPreviewViewModel.setSelectedIndex(index: indexPath.item)
+        if let index = currentVisibleIndex() {
+            photosPreviewViewModel.setSelectedIndex(index: index)
         }
     }
 }
