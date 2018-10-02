@@ -13,6 +13,9 @@ protocol PhotosView {
     func showMessage(_ message: String)
     func showALertTitle(_ title: String, message: String)
     
+    func showUploadIndicator(_ imageData: Data)
+    func hideUploadIndicator()
+    
     func pickPhotoFromCamera()
     func pickPhotoFromGallary()
 }
@@ -60,7 +63,9 @@ class PhotosViewModel {
     }
     
     func uploadImage(_ imageData: Data) {
+        photosView.showUploadIndicator(imageData)
         photosApi.uploadPhoto(imageData) { [weak self] (photo, error) in
+            self?.photosView.hideUploadIndicator()
             guard error == nil,
                 let photo = photo,
                 photo.isValid() else {

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,14 +57,44 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MuH-Ay-IU7" userLabel="Upload Indicator View">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pIb-3b-c3X">
+                                        <rect key="frame" x="323" y="8" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="pIb-3b-c3X" secondAttribute="height" multiplier="1:1" id="DYp-9W-5em"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mf2-62-hYo">
+                                        <rect key="frame" x="14" y="18.5" width="301" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Mf2-62-hYo" firstAttribute="leading" secondItem="MuH-Ay-IU7" secondAttribute="leading" constant="14" id="Bb8-ku-uQZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="pIb-3b-c3X" secondAttribute="bottom" constant="8" id="OTG-sX-EtS"/>
+                                    <constraint firstItem="pIb-3b-c3X" firstAttribute="leading" secondItem="Mf2-62-hYo" secondAttribute="trailing" constant="8" id="RYU-ZQ-ezm"/>
+                                    <constraint firstAttribute="height" constant="60" id="Sz6-Yr-WU3"/>
+                                    <constraint firstItem="pIb-3b-c3X" firstAttribute="top" secondItem="MuH-Ay-IU7" secondAttribute="top" constant="8" id="XnG-NV-Q91"/>
+                                    <constraint firstItem="Mf2-62-hYo" firstAttribute="centerY" secondItem="MuH-Ay-IU7" secondAttribute="centerY" id="oJG-dr-34a"/>
+                                    <constraint firstAttribute="trailing" secondItem="pIb-3b-c3X" secondAttribute="trailing" constant="8" id="viW-eQ-FRI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tar-a8-srl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9y8-40-E1X"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MuH-Ay-IU7" secondAttribute="trailing" id="BtM-W0-J2J"/>
                             <constraint firstItem="tar-a8-srl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="H9h-ku-P7U"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MuH-Ay-IU7" secondAttribute="bottom" id="QyN-GF-Rea"/>
                             <constraint firstItem="RV2-dk-aaw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="2" id="VH7-cF-vRA"/>
                             <constraint firstItem="RV2-dk-aaw" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="aOM-t4-prM"/>
                             <constraint firstItem="RV2-dk-aaw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bRV-xW-gAx"/>
+                            <constraint firstItem="MuH-Ay-IU7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bnx-0Y-lz9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tar-a8-srl" secondAttribute="trailing" constant="20" id="loY-mY-g0Y"/>
                             <constraint firstItem="tar-a8-srl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oU7-Ao-RE4"/>
                             <constraint firstItem="RV2-dk-aaw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xBi-tD-UlK"/>
@@ -80,6 +111,10 @@
                     <connections>
                         <outlet property="messageLabel" destination="tar-a8-srl" id="D3a-BV-dXQ"/>
                         <outlet property="photosCollectionView" destination="RV2-dk-aaw" id="qoL-gU-8WB"/>
+                        <outlet property="uploadingImage" destination="pIb-3b-c3X" id="ctn-sl-pRP"/>
+                        <outlet property="uploadingLabel" destination="Mf2-62-hYo" id="6DE-7F-wSR"/>
+                        <outlet property="uploadingView" destination="MuH-Ay-IU7" id="yTs-ex-zRy"/>
+                        <outlet property="uploadingViewBottomConstraint" destination="QyN-GF-Rea" id="GQI-Uk-LtS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

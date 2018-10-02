@@ -17,6 +17,11 @@ class PhotosViewController: UIViewController  {
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var uploadingView: UIView!
+    @IBOutlet weak var uploadingLabel: UILabel!
+    @IBOutlet weak var uploadingImage: UIImageView!
+    @IBOutlet weak var uploadingViewBottomConstraint: NSLayoutConstraint!
+    
     private var photosViewModel: PhotosViewModel!
 
     override func viewDidLoad() {
@@ -24,6 +29,12 @@ class PhotosViewController: UIViewController  {
         (photosCollectionView.collectionViewLayout as? MozaicLayout)?.setDelegate(delegate: self)
         photosViewModel = PhotosViewModel(photosView: self)
         photosViewModel.loadPhotos()
+        setInitialUI()
+    }
+    
+    private func setInitialUI() {
+        hideUploadIndicator()
+        uploadingLabel.text = "Uploading...".localised
     }
     
 }
@@ -53,6 +64,15 @@ extension PhotosViewController: PhotosView {
     
     func pickPhotoFromGallary() {
         showPicker(sourceType: .photoLibrary)
+    }
+    
+    func showUploadIndicator(_ imageData: Data) {
+        self.uploadingImage.image = UIImage(data: imageData)
+        self.uploadingViewBottomConstraint.constant = 0
+    }
+    
+    func hideUploadIndicator() {
+        self.uploadingViewBottomConstraint.constant = -100
     }
     
     private func showPicker(sourceType: UIImagePickerControllerSourceType) {
@@ -117,7 +137,7 @@ extension PhotosViewController: UIImagePickerControllerDelegate, UINavigationCon
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             picker.dismiss(animated: true)
             return
         }

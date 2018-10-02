@@ -10,5 +10,5 @@ import Foundation
 
 struct AlbumServiceApiConfig {
     static let scheme = "http"
-    static let host = "192.168.12.198"
+    static let host = "127.0.0.1"
 }

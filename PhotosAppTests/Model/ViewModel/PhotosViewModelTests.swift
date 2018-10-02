@@ -62,6 +62,42 @@ class PhotosViewModelTests: XCTestCase {
     }
     
     //MARK: UploadPhoto
+    
+    func testShouldShowUploadIndicatorWhileUploading() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<Photo>()
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        let imageDataToUpload = Data()
+        
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        photosViewModel.uploadImage(imageDataToUpload)
+        
+        XCTAssertTrue(mockView.isShowUploaderCalled)
+        XCTAssert(mockView.uploadingImageData == imageDataToUpload)
+    }
+    
+    func testShouldHideUploadIndicatorOnUploadFail() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<[Photo]>(data: nil, apiError: APIError(message: "Some Error"))
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        photosViewModel.uploadImage(Data())
+        
+        XCTAssertTrue(mockView.isHideUploaderCalled)
+    }
+    
+    func testShouldHideUploadIndicatorOnUploadSuccess() {
+        let mockView = MockPhotosView()
+        let mockPhotosApi = MockPhotosAPI<Photo>(data: Photo(photoId: "PhotoId", width: 100, height: 200), apiError: nil)
+        let photosEndPoints = PhotosEndPoints(scheme: "http", host: "host")
+        
+        let photosViewModel = PhotosViewModel(photosView: mockView, photosApi: mockPhotosApi, imagesEndpoints: photosEndPoints)
+        photosViewModel.uploadImage(Data())
+        
+        XCTAssertTrue(mockView.isHideUploaderCalled)
+    }
+    
     func testShouldShowErrorMessageOnUploadFailed() {
         let mockView = MockPhotosView()
         let mockPhotosApi = MockPhotosAPI<[Photo]>(data: nil, apiError: APIError(message: "Some Error"))

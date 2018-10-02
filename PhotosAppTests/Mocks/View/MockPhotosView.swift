@@ -18,6 +18,10 @@ class MockPhotosView: PhotosView {
     private (set) var isPickPhotoFromCameraCalled = false
     private (set) var isPickPhotoFromGallaryCalled = false
     
+    private (set) var isShowUploaderCalled = false
+    private (set) var isHideUploaderCalled = false
+    private (set) var uploadingImageData: Data?
+    
     private (set) var message: String?
     
     private (set) var alertTitle: String?
@@ -44,5 +48,14 @@ class MockPhotosView: PhotosView {
         isShowALertCalled = true
         self.alertTitle = title
         self.alertMessage = message
+    }
+    
+    func showUploadIndicator(_ imageData: Data) {
+        self.isShowUploaderCalled = true
+        self.uploadingImageData = imageData
+    }
+    
+    func hideUploadIndicator() {
+        self.isHideUploaderCalled = true
     }
 }
